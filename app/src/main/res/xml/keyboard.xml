@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyHeight="10%p"
+    android:keyHeight="9%p"
     android:keyWidth="25%p"
     android:horizontalGap="0dp">
     <Row>
@@ -14,6 +14,12 @@
         <Key
             android:codes="51"
             android:keyLabel="3"/>
+        <Key
+            android:codes="-5"
+            android:keyHeight="18%p"
+            android:keyEdgeFlags="right"
+            android:isRepeatable="true"
+            android:keyIcon="@mipmap/icon_delete_32dp"/>
     </Row>
     <Row>
         <Key
@@ -25,11 +31,32 @@
         <Key
             android:codes="54"
             android:keyLabel="6"/>
+    </Row>
+    <Row>
         <Key
-            android:codes="-5"
-            android:keyHeight="18%p"
+            android:codes="55"
+            android:keyLabel="7"/>
+        <Key
+            android:codes="56"
+            android:keyLabel="8"/>
+        <Key
+            android:codes="57"
+            android:keyLabel="9"/>
+        <Key
+            android:codes="-4"
+            android:keyLabel="确定"
             android:keyEdgeFlags="right"
-            android:isRepeatable="true"
-            android:keyIcon="@mipmap/icon_delete_32dp"/>
+            android:keyHeight="18%p"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="46"
+            android:keyLabel="."/>
+        <Key
+            android:codes="48"
+            android:keyLabel="0"/>
+        <Key
+            android:codes="-3"
+            android:keyIcon="@drawable/icon_hide_keyboard"/>
     </Row>
 </Keyboard>

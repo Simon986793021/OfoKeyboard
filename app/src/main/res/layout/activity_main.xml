@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.wind.ofokeyboard.MainActivity">
     <TextView
         android:layout_width="match_parent"
@@ -12,19 +11,31 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:textSize="18sp"
+        android:id="@+id/tv_summary"
         android:gravity="center"
         android:background="@color/gray"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
+        android:id="@+id/tv_number"
+        android:layout_below="@+id/tv_summary"
         android:text="车牌号一般为4-8位的数字"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_number"
+        android:id="@+id/et_numberplate"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/bt_sure"
+        android:layout_below="@+id/et_numberplate"
         android:text="立即用车"/>
-</LinearLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/ofokeyboardview"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
