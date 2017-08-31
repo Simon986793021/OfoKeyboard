@@ -9,10 +9,13 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -42,8 +45,14 @@ public class OfoKeyboard {
     private void showSoftKeyboard() {
         if (keyboard == null) {
             keyboard = new Keyboard(activity, R.xml.keyboard);
-        } else {
+        }
+        if(keyboardView==null)
+        {
+            keyboardView= (OfoKeyboardView) activity.findViewById(R.id.keyboard_view);
+        }
+        else {
             keyboardView.setKeyboard(keyboard);
+            keyboardView.setVisibility(View.VISIBLE);
             keyboardView.setOnKeyboardActionListener(listener);
         }
     }
@@ -144,6 +153,12 @@ public class OfoKeyboard {
             keyboardView.setVisibility(KeyboardView.GONE);
         }
     }
+//    private void randomKeyboard()
+//    {
+//        List<Keyboard.Key> keyList=keyboard.getKeys();
+//        List<Keyboard.Key> newkeyList =new ArrayList<>();
+//
+//    }
 
     /**
      * 隐藏系统键盘
