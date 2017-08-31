@@ -29,8 +29,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/bt_change_keyboard"
+        android:text="切换随机数字键盘"
+        android:layout_below="@+id/et_numberplate"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/bt_sure"
-        android:layout_below="@+id/et_numberplate"
+        android:layout_below="@+id/bt_change_keyboard"
         android:text="立即用车"/>
     <include
         android:layout_width="match_parent"

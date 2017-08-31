@@ -15,8 +15,10 @@ import android.widget.EditText;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by zhangcong on 2017/8/28.
@@ -27,15 +29,20 @@ public class OfoKeyboard {
     private Keyboard keyboard;
     private OfoKeyboardView keyboardView;
     private EditText editText;
-    public  OfoKeyboard (Activity activity)
+    private boolean isRandom=false;
+    public  OfoKeyboard (Activity activity )
     {
         this.activity=activity;
-        keyboard=new Keyboard(activity,R.xml.keyboard);
-        Log.i(">>>>>",keyboard.getClass().getName().toString()+keyboard.toString());
         keyboardView= (OfoKeyboardView) activity.findViewById(R.id.keyboard_view);
-        Log.i(">>>>>>",keyboardView.toString());
     }
-    public void attachTo(EditText editText){
+    //点击事件触发
+    public void attachTo(EditText editText,boolean isRandom){
+        /*
+        切换键盘需要重新new Keyboard对象，否则键盘不会改变,keyboardView放到构造函数里面，避免每次点击重新new 对象，提高性能
+         */
+        keyboard=new Keyboard(activity,R.xml.keyboard);
+        this.isRandom=isRandom;
+        Log.i(">>>>>","attachTo");
         this.editText=editText;
         hideSystemSofeKeyboard(activity,editText);
         showSoftKeyboard();
@@ -50,11 +57,17 @@ public class OfoKeyboard {
         {
             keyboardView= (OfoKeyboardView) activity.findViewById(R.id.keyboard_view);
         }
+        if (isRandom)
+        {
+            randomKeyboardNumber();
+        }
         else {
             keyboardView.setKeyboard(keyboard);
+        }
+            keyboardView.setEnabled(true);
+            keyboardView.setPreviewEnabled(false);
             keyboardView.setVisibility(View.VISIBLE);
             keyboardView.setOnKeyboardActionListener(listener);
-        }
     }
 
     private KeyboardView.OnKeyboardActionListener listener=new KeyboardView.OnKeyboardActionListener() {
@@ -153,12 +166,47 @@ public class OfoKeyboard {
             keyboardView.setVisibility(KeyboardView.GONE);
         }
     }
-//    private void randomKeyboard()
-//    {
-//        List<Keyboard.Key> keyList=keyboard.getKeys();
-//        List<Keyboard.Key> newkeyList =new ArrayList<>();
-//
-//    }
+    private boolean isNumber(String str) {
+        String wordstr = "0123456789";
+        return wordstr.contains(str);
+    }
+
+    private void randomKeyboardNumber() {
+        List<Keyboard.Key> keyList = keyboard.getKeys();
+        // 查找出0-9的数字键
+        List<Keyboard.Key> newkeyList = new ArrayList<Keyboard.Key>();
+        for (int i = 0; i < keyList.size(); i++) {
+            if (keyList.get(i).label != null
+                    && isNumber(keyList.get(i).label.toString())) {
+                newkeyList.add(keyList.get(i));
+            }
+        }
+        // 数组长度
+        int count = newkeyList.size();
+        // 结果集
+        List<KeyModel> resultList = new ArrayList<KeyModel>();
+        // 用一个LinkedList作为中介
+        LinkedList<KeyModel> temp = new LinkedList<KeyModel>();
+        // 初始化temp
+        for (int i = 0; i < count; i++) {
+            temp.add(new KeyModel(48 + i, i + ""));
+        }
+        // 取数
+        Random rand = new Random();
+        for (int i = 0; i < count; i++) {
+            int num = rand.nextInt(count - i);
+            resultList.add(new KeyModel(temp.get(num).getCode(),
+                    temp.get(num).getLable()));
+            temp.remove(num);
+        }
+        for (int i = 0; i < newkeyList.size(); i++) {
+            newkeyList.get(i).label = resultList.get(i).getLable();
+            newkeyList.get(i).codes[0] = resultList.get(i)
+                    .getCode();
+        }
+     //   hideKeyBoard();
+        keyboardView.setKeyboard(keyboard);
+    }
 
     /**
      * 隐藏系统键盘
@@ -166,6 +214,7 @@ public class OfoKeyboard {
      * @param editText
      */
     public static void hideSystemSofeKeyboard(Context context, EditText editText) {
+        Log.i(">>>>>","hide");
         int sdkInt = Build.VERSION.SDK_INT;
         if (sdkInt >= 11) {
             try {
