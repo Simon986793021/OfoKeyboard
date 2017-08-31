@@ -42,7 +42,7 @@ public class OfoKeyboardView extends KeyboardView {
             for (Keyboard.Key key : keys) {
                 // 数字键盘的处理
                 if (key.codes[0] == -4) {
-                  //  drawKeyBackground(R.drawable.bg_keyboardview_yes, canvas, key);
+                    drawKeyBackground(R.drawable.bg_keyboardview_yes, canvas, key);
                     drawText(canvas, key);
                 }
             }
