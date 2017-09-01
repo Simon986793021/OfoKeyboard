@@ -1,10 +1,9 @@
-package com.wind.ofokeyboard;
+package com.wind.numberkeyboard;
 
 import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.opengl.Visibility;
 import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
@@ -17,7 +16,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -37,6 +35,7 @@ public class OfoKeyboard {
     }
     //点击事件触发
     public void attachTo(EditText editText,boolean isRandom){
+
         /*
         切换键盘需要重新new Keyboard对象，否则键盘不会改变,keyboardView放到构造函数里面，避免每次点击重新new 对象，提高性能
          */

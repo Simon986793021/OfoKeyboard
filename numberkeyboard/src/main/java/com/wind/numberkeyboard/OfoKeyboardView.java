@@ -1,4 +1,4 @@
-package com.wind.ofokeyboard;
+package com.wind.numberkeyboard;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -24,7 +25,7 @@ public class OfoKeyboardView extends KeyboardView {
     public OfoKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
-
+        Log.i(">>>>>","构造函数被调用了");
     }
     /**
      * 重新画一些按键

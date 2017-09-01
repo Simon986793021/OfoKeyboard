@@ -19,7 +19,7 @@
             android:keyHeight="18%p"
             android:keyEdgeFlags="right"
             android:isRepeatable="true"
-            android:keyIcon="@mipmap/icon_delete_32dp"/>
+            android:keyIcon="@drawable/icon_delete_32dp"/>
     </Row>
     <Row>
         <Key
