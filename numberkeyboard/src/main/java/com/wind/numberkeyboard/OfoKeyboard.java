@@ -22,7 +22,7 @@ import java.util.Random;
  * Created by zhangcong on 2017/8/28.
  */
 
-public class OfoKeyboard {
+public class    OfoKeyboard {
     private Activity activity;
     private Keyboard keyboard;
     private OfoKeyboardView keyboardView;
